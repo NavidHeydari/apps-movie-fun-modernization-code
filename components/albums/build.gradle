@@ -1,0 +1,18 @@
+//point to the common part
+apply from: "../../java.gradle"
+dependencies {
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
+
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "commons-lang:commons-lang:2.4"
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.apache.tika:tika-core:$tikaVersion"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:$jacksonVersion"
+    compile "com.amazonaws:aws-java-sdk:$amazonVersion"
+
+}
