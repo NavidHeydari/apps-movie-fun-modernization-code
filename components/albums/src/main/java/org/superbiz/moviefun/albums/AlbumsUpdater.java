@@ -24,9 +24,9 @@ public class AlbumsUpdater {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ObjectReader objectReader;
     private final BlobStore blobStore;
-    private final AlbumsBean albumsBean;
+    private final AlbumsRepository albumsBean;
 
-    public AlbumsUpdater(BlobStore blobStore, AlbumsBean albumsBean) {
+    public AlbumsUpdater(BlobStore blobStore, AlbumsRepository albumsBean) {
         this.blobStore = blobStore;
         this.albumsBean = albumsBean;
 
@@ -66,9 +66,10 @@ public class AlbumsUpdater {
     }
 
     private void deleteOldAlbums(List<Album> albumsToHave, List<Album> albumsWeHave) {
-        Stream<Album> albumsToDelete = albumsWeHave
+        Stream<Long> albumsToDelete = albumsWeHave
             .stream()
-            .filter(album -> albumsToHave.stream().noneMatch(album::isEquivalent));
+            .filter(album -> albumsToHave.stream().noneMatch(album::isEquivalent))
+            .map(x -> x.getId());
 
         albumsToDelete.forEach(albumsBean::deleteAlbum);
     }

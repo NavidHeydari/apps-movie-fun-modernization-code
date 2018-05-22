@@ -1,0 +1,29 @@
+applications:
+- name: album-service
+  path: ./applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
+  host: album-service-nh
+  memory: 1G
+  instances: 1
+  services:
+    - album-database
+    - moviefun-s3
+
+- name: movie-service
+  path: ./applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
+  host: movie-service-nh
+  memory: 1G
+  instances: 1
+  services:manifest.yml
+    - movie-database
+
+- name: movie-fun-app
+  path: ./applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  host: movie-fun-app-nh
+  memory: 1G
+  instances: 1
+  services:
+#  - movie-database
+     - moviefun-s3
+  env:
+    MOVIES_URL: https://movie-service-nh.apps.pikes.pal.pivotal.io/movies
+    ALBUMS_URL: https://album-service-nh.apps.pikes.pal.pivotal.io/albums
