@@ -26,6 +26,7 @@ public class Application {
 
     @Bean
     ServiceCredentials serviceCredentials(@Value("${vcap.services}") String vcapServices) {
+        System.out.printf(">>>>>>" + vcapServices );
         return new ServiceCredentials(vcapServices);
     }
 
